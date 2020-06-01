@@ -1,0 +1,94 @@
+/** 正三角 */
+.triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 25px 40px 25px;
+  border-color: transparent transparent rgb(245, 129, 127) transparent;
+}
+
+/** 倒三角 */
+.triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 40px 25px 0 25px;
+  border-color:  rgb(245, 129, 127) transparent transparent transparent;
+}
+
+/**虚线效果*/
+.dotted-line{
+    border: 1px dashed transparent;
+    background: linear-gradient(white,white) padding-box, repeating-linear-gradient(-45deg,#ccc 0, #ccc .25em,white 0,white .75em);
+}
+
+/**卡券效果*/
+.coupon{
+  width: 300px;
+  height: 100px;
+  position: relative;
+  background: radial-gradient(circle at right bottom, transparent 10px, #ffffff 0) top right /50% 51px no-repeat,
+    radial-gradient(circle at left bottom, transparent 10px, #ffffff 0) top left / 50% 51px no-repeat,
+    radial-gradient(circle at right top, transparent 10px, #ffffff 0) bottom right / 50% 51px no-repeat,
+    radial-gradient(circle at left top, transparent 10px, #ffffff 0) bottom left / 50% 51px no-repeat;
+  filter: drop-shadow(2px 2px 2px rgba(0,0,0,.2));
+}
+
+// 三角形阴影
+.shadow-triangle{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 50px;
+    border-color: transparent transparent rgb(245, 129, 127) transparent;
+    filter:drop-shadow(10px 0px 10px  rgba(238, 125, 55,0.5));
+}
+
+// 缺圆投影
+.circle-square{
+    width:100px;
+    height:50px;
+    line-height: 50px;
+    background: radial-gradient(circle at bottom right, transparent 20px, rgb(245, 129, 127) 15px);
+    filter: drop-shadow(2px 2px 2px rgba(238, 132, 66, 0.9));
+}
+
+// 气泡阴影
+.tip {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid rgb(245, 129, 127);
+    border-radius: 4px;
+    position: relative;
+    background-color: #fff;
+    filter: drop-shadow(0px 2px 4px rgba(245, 129, 127, 0.9));
+    &::before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent #fff transparent;
+      position: absolute;
+      top: -10px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 2;
+    }
+    &::after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent rgb(245, 129, 127) transparent;
+      position: absolute;
+      top: -11px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 1;
+    }
+}
