@@ -126,5 +126,52 @@ export default {
             }
         }
         return arr;
+    },
+    /**
+     * [二分查找] 递归
+     * 设定区间,low和high
+     * 找出口： 找到target，返回target；
+     *  否则寻找，当前次序没有找到，把区间缩小后递归
+     */
+    binaryFind(arr, target, low = 0, high = arr.length - 1) {
+        const n = Math.floor((low + high) / 2);
+        const curr = arr[n];
+        if (target === curr) {
+            return n;
+        } else if (target > curr) {
+            // tatget 在右边 区间右移
+            return this.binaryFind(arr, target, n + 1, high);
+        } else if (target < curr) {
+            // tatget 在左边 区间左移
+            return this.binaryFind(arr, target, low, n - 1);
+        } else {
+            return -1;
+        }
+    },
+    /**
+     * [二分查找] 循环
+     * 设定区间,low和high
+     * 找出口： 找到target，返回target；
+     *  否则寻找，当前次序没有找到，把区间缩小
+     */
+    binaryFindByLoop(arr, target) {
+        let low = 0,
+            high = arr.length - 1,
+            middle = undefined;
+        while (low <= high) {
+            middle = Math.floor((low + high) / 2);
+            const curr = arr[middle];
+            if (target === curr) {
+                return middle;
+            } else if (target > curr) {
+                // tatget 在右边 区间右移
+                low = middle + 1;
+            } else if (target < curr) {
+                // tatget 在左边 区间左移
+                high = middle - 1;
+            } else {
+                return -1;
+            }
+        }
     }
 }
