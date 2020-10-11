@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>数组声明式方法</title>
-</head>
-<body>
-  <script>
-    /* 
+ /*
     自定义实现一组数组声明式方法
       1. map()
       2. reduce()
@@ -110,6 +100,3 @@
     // 所有偶数位下标的元素是否都为奇数
     console.log(arr.every((item, index) => index%2===1 || item%2===1))
     console.log(arr.some((item, index) => index%2===1 || item%2===1))
-  </script>
-</body>
-</html>
