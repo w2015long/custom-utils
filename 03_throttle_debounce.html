@@ -116,7 +116,6 @@
     function handleClick(event) { // 处理事件的回调
       console.log('处理点击事件', this, event)
     }
-
     // document.getElementById('throttle').onclick = handleClick
     document.getElementById('throttle').onclick = throttle(handleClick, 2000)
     document.getElementById('debounce').onclick = debounce(handleClick, 2000)
