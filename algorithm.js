@@ -177,7 +177,7 @@ export default {
     /**
      * 寻找出无重复字符的最长子串 
      */
-    lengthOfLongestSubstring (S) {
+    lengthOfLongestSubstring (s) {
         // 用于存储指针移动过程中的值
         let map = {};
         // 双指针
