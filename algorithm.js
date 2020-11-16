@@ -173,5 +173,31 @@ export default {
                 return -1;
             }
         }
+    },
+    /**
+     * 寻找出无重复字符的最长子串 
+     */
+    lengthOfLongestSubstring (S) {
+        // 用于存储指针移动过程中的值
+        let map = {};
+        // 双指针
+        let left = 0;
+        let right = 0;
+        // 结果
+        let count = 0;
+        // 指针移动终止条件
+        while (right < s.length) {
+            const char = s[right];
+            // 根据题意我们需要寻找不重复的最长子串
+            // 当 char 出现时我们需要移动左指针到重复字符的下一位
+            if (char in map) {
+                left = Math.max(left, map[char] + 1);
+            }
+            // 求解
+            count = Math.max(count, right - left + 1);
+            // 移动右指针并存下索引
+            map[char] = right++;
+        }
+        return count;
     }
 }
