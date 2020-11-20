@@ -199,5 +199,31 @@ export default {
             map[char] = right++;
         }
         return count;
+    },
+    /*
+      防抖:
+        @params:
+          func[function]:最后要触发执行的函数
+          wait[number]:频繁设定的界限
+          immediate[boolean]:默认多次操作，我们识别的是最后一次，但是immediate=true，让其识别第一次
+        @return
+          可以被调用执行的函数
+     */
+    debounce(func,wait = 300,immediate = false){
+        let timer = null;
+        return function anonymous(...params){
+        let now = immediate && !timer;
+
+        //每次点击都把之前设置的定时器清除掉
+        clearInterval(timer)
+        //重新设置一个新的定时器监听wait事件内是否触发第二次
+        timer = setTimeout(() => {
+            timer = null;//垃圾回收机制
+              //wait这么久的等待中，没有触发第二次
+              !immediate ? func.call(this,...params) : null;
+            }, wait);
+            //如果是立即执行
+            now ? func.call(this,...params) : null;
+        }
     }
 }
