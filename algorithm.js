@@ -225,5 +225,34 @@ export default {
             //如果是立即执行
             now ? func.call(this,...params) : null;
         }
+    },
+    /*
+    @params:
+        func[function]:最后要触发执行的函数
+        wait[number]:触发的频率
+    @return
+        可以被调用执行的函数
+    */
+    throttle(func,wait = 300){
+        let timer = null,
+            previous = 0;//记录上一次操作时间
+        return function anonymouse(...params){
+            let now = new Date(),//记录当前时间
+            remaining = wait - (now - previous);//记录还差多久达到我们一次触发的频率
+            if (remaining <= 0) {
+                //两次操作的间隔时间已经超过wait了
+                window.clearInterval(timer);
+                timer = null;
+                previous = now;
+                func.call(this,...params);
+            } else if (!timer) {
+                //两次操作的间隔时间还不符合触发的频率
+                timer = setTimeout(() => {
+                    timer = null;
+                    previous = new Date();
+                    func.call(this,...params);
+                }, remaining);
+            }
+        }
     }
 }
