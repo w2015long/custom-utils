@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			body {
+				/* background-image: linear-gradient(180deg, #090907 0%, #313030 100%); */
+				/* background-image: linear-gradient(180deg, #090907 0%, #504b43 100%); */
+				/* background-image: linear-gradient(232deg, #ffe5af 0%, #ddbe74 100%); */
+				background: linear-gradient(120deg, #4B0000 0%, #000000 100%),
+				linear-gradient(300deg, #1E0000 0%, #0038FF 100%, #0038FF 100%),
+				linear-gradient(65deg, #00FFFF 0%, #FF00A8 100%),
+				linear-gradient(185deg, #FF0000 10%, #1400FF 95%),
+				radial-gradient(100% 140% at 100% 0%, #00A3FF 0%, #C10097 100%);
+				background-blend-mode: color-dodge, overlay, difference, color-dodge, normal;
+			}
+			#can{
+				background: #fff;
+				margin:50px auto;
+				display: block;
+				border: 15px solid #090907;
+				border-radius: 50%;
+				box-shadow:0 0 5px 5px #ddbe74;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="can" width="500" height="500"></canvas>
+		<script>
+			const c=document.getElementById("can");
+			const ctx=c.getContext("2d");
+			const width = ctx.canvas.width;
+			const rem = width / 200;
+			const r = width / 2;
+			function clock(H,M,S){
+				// 1.清空及基本环境
+				clear()
+				// 改变原点
+				ctx.translate(250,250)
+				ctx.beginPath();
+				// 圆框
+				ctx.lineWidth=20
+				ctx.strokeStyle = "#ffe5af"
+				ctx.arc(0,0,250,0,2*Math.PI);
+				ctx.stroke();
+				ctx.closePath();
+				ctx.beginPath();
+				// 保存路径
+				ctx.save()
+				ctx.fillStyle = "#666665"
+				// 2.刻度尺
+				for (let i = 0 ;i < 60;i++) {
+					ctx.rotate(6*Math.PI/180)
+					ctx.fillRect(0,-237,2,3);
+					ctx.fill();
+				}
+				// 中心圆
+				ctx.lineWidth=5
+				ctx.strokeStyle = "#e9887a"
+				ctx.arc(0,0,10,0,10*Math.PI);
+				ctx.stroke();
+				ctx.lineWidth=2;
+				ctx.closePath();
+				ctx.beginPath();
+
+				ctx.strokeStyle = "#edb7af"
+				ctx.arc(0,0,8,0,20*Math.PI);
+				ctx.stroke();
+				ctx.lineWidth=8;
+				ctx.closePath();
+				ctx.beginPath();
+
+				ctx.strokeStyle = "#c44a3d"
+				ctx.arc(0,0,5,0,10*Math.PI);
+				ctx.stroke();
+				ctx.closePath();
+				ctx.beginPath();
+			    const hourNumbers = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2];
+			    hourNumbers.map(function (num, i) {
+			        const rad = 2 * Math.PI / 12 * i;
+			        const x = Math.cos(rad) * (r - 30 * rem);
+			        const y = Math.sin(rad) * (r - 30 * rem);
+			        ctx.textAlign = 'center';
+			        ctx.textBaseline = 'middle';
+			        ctx.font = 18 * rem + "px 微软雅黑";
+			        ctx.fillText(num, x, y)
+			    });
+				for (let i = 0 ;i < 12;i++) {
+					ctx.rotate(30*Math.PI/180)
+					ctx.fillRect(0,-235,2,10);
+					ctx.fill();
+				}
+				// ctx.restore()
+				draw(H,M,S)
+			}
+			ctx.strokeStyle = "#de6857"
+				ctx.arc(0,0,20,0,2*Math.PI);
+				ctx.stroke();
+				ctx.closePath();
+				ctx.beginPath();
+
+			// 时钟走动
+			function draw(H,M,S){
+				// S
+			  ctx.fillStyle = "#de6857"
+			  ctx.rotate(S*Math.PI/180)
+			  ctx.fillRect(0,0,3,-200);
+			  ctx.fill();
+			  ctx.restore()
+			  ctx.save()
+			  // M
+			  ctx.fillStyle = "#666665"
+			  ctx.rotate(M*Math.PI/180)
+			  ctx.fillRect(0,0,5,-120);
+			  ctx.fill();
+			  //H
+			  ctx.restore()
+			  ctx.save()
+			  ctx.fillStyle = "#666665"
+			  ctx.rotate(H*Math.PI/180)
+			  ctx.fillRect(0,0,5,-50);
+			  ctx.fill();
+			  ctx.restore()
+			  ctx.save()
+			  ctx.translate(-250,-250)
+			}	
+
+			// 清空
+			function clear(){
+				ctx.fillStyle = "#fff"
+				ctx.fillRect(0,0,500,500);
+				ctx.fill();
+			}
+			setInterval(function(){
+				// 时间转换刻度
+				const time = new Date();//每隔100ms 查询一次此处时间 要写定时器里面
+				const hour = time.getHours() % 12 * 30 + time.getMinutes()/60*30;
+				const min = time.getMinutes() * 6 + time.getSeconds()/60*6;
+				const sed = time.getSeconds() * 6 + time.getMilliseconds()/1000*6;
+				console.log(hour,min,sed)
+				clock(hour,min,sed)
+			},1000)
+		</script>
+	</body>
+</html>
