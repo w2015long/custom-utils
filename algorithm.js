@@ -195,7 +195,39 @@ export default {
         }
       }
     },
+  /**
+   * 数组转树
+   * @param {Array} 输入
+   * @param {Object.String} keyMap.KEY_ID 表示唯一性键值(id)
+   * @param {Object.String} keyMap.KEY_PID 对应的父id
+   * @returns {Object} 树结构
+   */
+   array2Tree(arr,keyMap = { KEY_ID: 'id', KEY_PID: 'pId' }) {
+    const { KEY_ID, KEY_PID } = keyMap
+    const result = [];   // 存放结果集
+    const itemMap = {};  // 
+    // 先转成map存储
+    for (const item of arr) {
+      itemMap[item[KEY_ID]] = {...item, children: []}
+    }
 
+    for (const item of arr) {
+      const id = item[[KEY_ID]];
+      const pid = item[KEY_PID];
+      const treeItem =  itemMap[id];
+      if (pid === 0) {
+        result.push(treeItem);
+      } else {
+        if (!itemMap[pid]) {
+          itemMap[pid] = {
+            children: [],
+          }
+        }
+        itemMap[pid].children.push(treeItem)
+      }
+    }
+    return result;
+  }
     /**
      * 寻找出无重复字符的最长子串 
      */
