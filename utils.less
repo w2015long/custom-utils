@@ -1,0 +1,65 @@
+@OSSUrl: '../assets/';
+
+.bg-img(@url) {
+    background-image: url('@{OSSUrl}@{url}');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    //image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.text-clamp() {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-clamp-line(@line: 1) {
+    display: -webkit-box;
+    /*! autoprefixer: off */
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+    /*! autoprefixer: on */
+    text-overflow: ellipsis;
+    -webkit-line-clamp: @line;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.boxloop(@max)when(@max >=0) {
+  .ml@{max} {
+    margin-left: (1px * @max) !important;
+  }
+  .mr@{max} {
+    margin-right: (1px * @max) !important;
+  }
+  .mb@{max} {
+    margin-bottom: (1px * @max) !important;
+  }
+  .mt@{max} {
+    margin-top: (1px * @max) !important;
+  }
+  .pd@{max} {
+    padding: (1px * @max) !important;
+  }
+  .pt@{max} {
+    padding-top: (1px * @max) !important;
+  }
+  .pb@{max} {
+    padding-bottom: (1px * @max) !important;
+  }
+  .pl@{max} {
+    padding-left: (1px * @max) !important;
+  }
+  .pr@{max} {
+    padding-right: (1px * @max) !important;
+  }
+  .boxloop((@max - 5));
+}
+
+.boxloop(100);
